@@ -1,62 +1,53 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tic Tac Toe</title>
     <link rel="stylesheet" href="styles/style.css">
 </head>
-<body> 
-   <main>
-    <div id="containerall">
-    <h1>Tic Tac Toe</h1>
-    <!--Buttons-->
-    <section id="buttons">
-        <button id="2players">2 Players</button>
-        <button id="bot">Bot</button>
-    </section>
+<body>
+    <main>
+        <div id="containerall">
+        <h1>Tic Tac Toe</h1>
 
-    <!--GAME-->
-    <section id="container" class="hide">
-        <div class="box" id="block-1"></div>
-        <div class="box" id="block-2"></div>
-        <div class="box" id="block-3"></div>
-        <div class="box" id="block-4"></div>
-        <div class="box" id="block-5"></div>
-        <div class="box" id="block-6"></div>
-        <div class="box" id="block-7"></div>
-        <div class="box" id="block-8"></div>
-        <div class="box" id="block-9"></div>
+        <!--Buttons-->
+            <div id="buttons-container">
+                <button id="players2" class="button">2 Players</button>
+                <button id="ai-player" class="button">Bot</button>
+            </div>
+            <!--GAME-->
+            <div id="container" class="hide">
+                <div class="box" id="block-1"></div>
+                <div class="box" id="block-2"></div>
+                <div class="box" id="block-3"></div>
+                <div class="box" id="block-4"></div>
+                <div class="box" id="block-5"></div>
+                <div class="box" id="block-6"></div>
+                <div class="box" id="block-7"></div>
+                <div class="box" id="block-8"></div>
+                <div class="box" id="block-9"></div>
 
-        <!--SCORE-->
-        <div id="score">
-            <h2>Escore</h2>
-            <span class="scorebox">
-                <span id="xscore">X</span>:
-                <span id="score1">0</span>
-            </span>
+                 <!--SCORE-->    
+                <div id="scoreboard-container">
+                <h2>Score</h2>
 
-            <span class="scorebox">
-                <span id="oscore"></span>:
-                <span id="score2">0</span>
-            </span> 
+                <span class="score-box"><span id="x-scoreboard">X</span>: <span id="scoreboard-1">0</span></span>
+                <span class="score-box"><span id="o-scoreboard"></span>: <span id="scoreboard-2">0</span></span>
+                </div>
+
+                <!--x e O-->
+                <div class="hide">
+                    <div class="x">X</div>
+                    <div class="o"></div>
+                </div>
+
+                <!--FINAL MESSAGE-->
+                <div id="message" class="hide">
+                    <p>x</p>
+                </div>
+
+                <script src="js/tictactoe.js"></script>
         </div>
-    </section>
-    </div>
-    <!-- X OR 0-->
-    <section class="hide">
-        <div class="x">X</div>
-        <div class="o"></div>
-    </section>
-
-    <!--FINAL MESSAGE-->
-    <section>
-        <div id="msg" class="hide"></div>
-        <p id="msgText"></p>
-    </section>
-
-   </main>
-
-   <script src="js/tictactoe.js"></script> 
+    </main>
 </body>
 </html>

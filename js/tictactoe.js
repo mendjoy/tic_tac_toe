@@ -1,313 +1,299 @@
 let x = document.querySelector('.x');
 let o = document.querySelector('.o');
 let boxes = document.querySelectorAll('.box');
-let buttons = document.querySelectorAll('#buttons button');
-let msgContainer = document.querySelector('#msg');
-let msgText = document.querySelector('#msgText');
+let buttons = document.querySelectorAll('#buttons-container button');
+let messageContainer = document.querySelector("#message");
+let messageText = document.querySelector("#message p");
 let secondPlayer;
 
+// contador de jogadas
 let player1 = 0;
 let player2 = 0;
 
-for (let i = 0; i < boxes.length; i++){
+// adicionando o evento de click a todos as caixas
+for(let i = 0; i < boxes.length; i++) {
 
-    boxes[i].addEventListener('click', function(){
+  // quando há o click na caixa
+  boxes[i].addEventListener("click", function() {
 
-        let element = checkElement(player1, player2);
+    let el = checkEl(player1, player2);
+    
+    // verificando se ja tem um elemento
+    if(this.childNodes.length == 0) {
+      let cloneEl = el.cloneNode(true);
 
-    if (this.childNodes.length == 0){
+      this.appendChild(cloneEl);
 
-        let cloneElement = element.cloneNode(true);
-        this.appendChild(cloneElement);
+      // computa a jogada
+      if(player1 == player2) {
+        player1++;
 
-        //contando as jogadas
-        if (player1 == player2){
-        player1++
-        
-        if(secondPlayer == 'bot'){
+        // jogada ia
+        if(secondPlayer == 'ai-player') {
 
-            //executar jogada com o bot 
+          computerPlay();
+          player2++;
 
-            botPlay();
-            player2++;
         }
-        } else {
-            player2++
-        }
 
-        checkVictory();
+      } else {
+        player2++;
+      }
+
+      checkWinCondition();
+
     }
-    })
+
+  });  
+
 }
 
-//identificar jogador 
-function checkElement(player1, player2){
-    if (player1 == player2){ //inicio 
-        element = x;
+// ve quem está jogando
+function checkEl(player1, player2) {
+
+  if(player1 == player2) {
+    el = x;
+  } else {
+    el = o;
+  }
+
+  return el;
+}
+
+// checa quem venceu e quem perdeu após cada jogada
+function checkWinCondition() {
+
+  let b1 = document.getElementById('block-1');
+  let b2 = document.getElementById('block-2');
+  let b3 = document.getElementById('block-3');
+  let b4 = document.getElementById('block-4');
+  let b5 = document.getElementById('block-5');
+  let b6 = document.getElementById('block-6');
+  let b7 = document.getElementById('block-7');
+  let b8 = document.getElementById('block-8');
+  let b9 = document.getElementById('block-9');
+
+  // horizontal
+  if(b1.childNodes.length > 0 && b2.childNodes.length > 0 && b3.childNodes.length > 0) {
+
+    let b1Child = b1.childNodes[0].className;
+    let b2Child = b2.childNodes[0].className;
+    let b3Child = b3.childNodes[0].className;
+
+    if(b1Child == 'x' && b2Child == 'x' && b3Child == 'x') {
+      declareWinner('x');
+    } else if(b1Child == 'o' && b2Child == 'o' && b3Child == 'o') {
+      declareWinner('o');
+    }
+
+  }
+
+  if(b4.childNodes.length > 0 && b5.childNodes.length > 0 && b6.childNodes.length > 0) {
+
+    let b4Child = b4.childNodes[0].className;
+    let b5Child = b5.childNodes[0].className;
+    let b6Child = b6.childNodes[0].className;
+
+    if(b4Child == 'x' && b5Child == 'x' && b6Child == 'x') {
+      declareWinner('x');
+    } else if(b4Child == 'o' && b5Child == 'o' && b6Child == 'o') {
+      declareWinner('o');
+    }
+    
+  }
+
+  if(b7.childNodes.length > 0 && b8.childNodes.length > 0 && b9.childNodes.length > 0) {
+
+    let b7Child = b7.childNodes[0].className;
+    let b8Child = b8.childNodes[0].className;
+    let b9Child = b9.childNodes[0].className;
+
+    if(b7Child == 'x' && b8Child == 'x' && b9Child == 'x') {
+      declareWinner('x');
+    } else if(b7Child == 'o' && b8Child == 'o' && b9Child == 'o') {
+      declareWinner('o');
+    }
+    
+  }
+
+  // Vertical
+  if(b1.childNodes.length > 0 && b4.childNodes.length > 0 && b7.childNodes.length > 0) {
+
+    let b1Child = b1.childNodes[0].className;
+    let b4Child = b4.childNodes[0].className;
+    let b7Child = b7.childNodes[0].className;
+
+    if(b1Child == 'x' && b4Child == 'x' && b7Child == 'x') {
+      declareWinner('x');
+    } else if(b1Child == 'o' && b4Child == 'o' && b7Child == 'o') {
+      declareWinner('o');
+    }
+    
+  }
+
+  if(b2.childNodes.length > 0 && b5.childNodes.length > 0 && b8.childNodes.length > 0) {
+
+    let b2Child = b2.childNodes[0].className;
+    let b5Child = b5.childNodes[0].className;
+    let b8Child = b8.childNodes[0].className;
+
+    if(b2Child == 'x' && b5Child == 'x' && b8Child == 'x') {
+      declareWinner('x');
+    } else if(b2Child == 'o' && b5Child == 'o' && b8Child == 'o') {
+      declareWinner('o');
+    }
+    
+  }
+
+  if(b3.childNodes.length > 0 && b6.childNodes.length > 0 && b9.childNodes.length > 0) {
+
+    let b3Child = b3.childNodes[0].className;
+    let b6Child = b6.childNodes[0].className;
+    let b9Child = b9.childNodes[0].className;
+
+    if(b3Child == 'x' && b6Child == 'x' && b9Child == 'x') {
+      declareWinner('x');
+    } else if(b3Child == 'o' && b6Child == 'o' && b9Child == 'o') {
+      declareWinner('o');
+    }
+    
+  }
+
+  // Diagonal
+
+  if(b1.childNodes.length > 0 && b5.childNodes.length > 0 && b9.childNodes.length > 0) {
+
+    let b1Child = b1.childNodes[0].className;
+    let b5Child = b5.childNodes[0].className;
+    let b9Child = b9.childNodes[0].className;
+
+    if(b1Child == 'x' && b5Child == 'x' && b9Child == 'x') {
+      declareWinner('x');
+    } else if(b1Child == 'o' && b5Child == 'o' && b9Child == 'o') {
+      declareWinner('o');
+    }
+    
+  }
+
+  if(b3.childNodes.length > 0 && b5.childNodes.length > 0 && b7.childNodes.length > 0) {
+
+    let b3Child = b3.childNodes[0].className;
+    let b5Child = b5.childNodes[0].className;
+    let b7Child = b7.childNodes[0].className;
+
+    if(b3Child == 'x' && b5Child == 'x' && b7Child == 'x') {
+      declareWinner('x');
+    } else if(b3Child == 'o' && b5Child == 'o' && b7Child == 'o') {
+      declareWinner('o');
+    }
+    
+  }
+
+
+  // deu velha
+  let counter = 0;
+
+  for(let i = 0; i < boxes.length; i++) {
+
+    if(boxes[i].childNodes[0] != undefined) {
+      counter ++;
+    }
+
+  }
+
+  if(counter == 9) {
+    declareWinner('deu velha');
+  }
+
+}
+
+// limpa o jogo e atualiza placar
+function declareWinner(winner) {
+
+  let scoreboardX = document.querySelector("#scoreboard-1");
+  let scoreboardY = document.querySelector("#scoreboard-2");
+  let msg = '';
+
+  if(winner == 'x') {
+    scoreboardX.textContent = parseInt(scoreboardX.textContent) + 1;
+    msg = "Player 1 wins!";
+  } else if(winner == 'o') {
+    scoreboardY.textContent = parseInt(scoreboardY.textContent) + 1;
+    msg = "Player 2 wins!";
+  } else {
+    msg = "GAME OVER!";
+  }
+
+  // exibe mensagem
+  messageText.innerHTML = msg;
+  messageContainer.classList.remove("hide");
+
+  // esconde mensagem
+  setTimeout(function() {
+    messageContainer.classList.add("hide");
+  }, 1000);
+
+  // zera as jogadas
+  player1 = 0;
+  player2 = 0;
+
+  // remove os x e o
+  let boxesToRemove = document.querySelectorAll(".box div");
+  
+  for(let i = 0; i < boxesToRemove.length; i++) {
+    boxesToRemove[i].parentNode.removeChild(boxesToRemove[i]);
+  }
+
+
+}
+
+// evento para ver se é contra IA ou segundo player
+for(let i = 0; i < buttons.length; i++) {
+
+  buttons[i].addEventListener("click", function() {
+
+    secondPlayer = this.getAttribute('id');
+
+    for(j = 0; j < buttons.length; j++) {
+      buttons[j].style.display = 'none';
+    }
+
+    setTimeout(function() {
+      let container = document.querySelector("#container");
+      container.classList.remove("hide");
+    }, 500);
+
+  });
+
+}
+
+// jogada IA 
+function computerPlay() {
+
+  let cloneO = o.cloneNode(true);
+  counter = 0;
+  filled = 0;
+          
+  for(let i = 0; i < boxes.length; i++) {
+
+    let randomNumber = Math.floor(Math.random() * 5);
+
+    // só se não tiver marcado anteriormente
+    if(boxes[i].childNodes[0] == undefined) {  
+      if(randomNumber <= 1) {
+        boxes[i].appendChild(cloneO);
+        counter++;
+        break;
+      }
+    // checar quantas estão preenchidas        
     } else {
-        element = o; 
+      filled++;
     }
 
-    return element
-}
+  }
 
-// 2 players o bot 
-
-for (let i = 0; i < buttons.length; i++){
-    buttons[i].addEventListener('click', function(){
-        secondPlayer = this.getAttribute('id');
-
-        for (let  x = 0; x < buttons.length; x++){
-            buttons[x].style.display = 'none'
-        }
-
-        setTimeout(function(){
-            let container = document.querySelector('#container');
-            container.classList.remove('hide');
-
-        }, 500)
-    })
-}
-
-//checa quem venceu e perdeu 
- function checkVictory(){
-    let bloco1 = document.getElementById('block-1');
-    let bloco2 = document.getElementById('block-2')
-    let bloco3 = document.getElementById('block-3')
-    let bloco4 = document.getElementById('block-4')
-    let bloco5 = document.getElementById('block-5')
-    let bloco6 = document.getElementById('block-6')
-    let bloco7 = document.getElementById('block-7')
-    let bloco8 = document.getElementById('block-8')
-    let bloco9 = document.getElementById('block-9')
-
-//checagem horizontal 
-
-if(bloco1.childNodes.length > 0 && bloco2.childNodes.length > 0 && bloco3.childNodes.length > 0 ){ //checa se a caixa selecionada ja esta preenchida
-
-    let bloco1Child = bloco1.childNodes[0].className;
-    let bloco2Child = bloco2.childNodes[0].className;
-    let bloco3Child = bloco3.childNodes[0].className;
-
-
-//Checa se a primeira linha horizontal esta preenchido para determinar vitoria
-    if(bloco1Child == 'x' && bloco2Child == 'x' && bloco3Child == 'x'){
-        winner('x')
-    } else if (bloco1Child == 'o' && bloco2Child == 'o' && bloco3Child == 'o'){
-        winner('o')
-    }
-
-    }
- 
-
- if(bloco4.childNodes.length > 0 && bloco5.childNodes.length > 0 && bloco6.childNodes.length > 0 ){ //checa se a caixa selecionada ja esta preenchida
-
-    let bloco4Child = bloco4.childNodes[0].className;
-    let bloco5Child = bloco5.childNodes[0].className;
-    let bloco6Child = bloco6.childNodes[0].className;
-
-
-//Checa se o segundo linha horizontal esta preenchido para determinar vitoria
-    if(bloco4Child == 'x' && bloco5Child == 'x' && bloco6Child == 'x'){
-        winner('x')
-
-    } else if (bloco4Child == 'o' && bloco5Child == 'o' && bloco6Child == 'o'){
-        winner('o')
-    }
+  if(counter == 0 && filled < 9) {
+    computerPlay();
+  }
 
 }
- 
-if(bloco7.childNodes.length > 0 && bloco8.childNodes.length > 0 && bloco9.childNodes.length > 0 ){ //checa se a caixa selecionada ja esta preenchida
-
-    let bloco7Child = bloco7.childNodes[0].className;
-    let bloco8Child = bloco8.childNodes[0].className;
-    let bloco9Child = bloco9.childNodes[0].className;
-
-
-//Checa se a terceira linha horizontal esta preenchido para determinar vitoria
-    if(bloco7Child == 'x' && bloco8Child == 'x' && bloco9Child == 'x'){
-        winner('x')
-    } else if (bloco7Child == 'o' && bloco8Child == 'o' && bloco9Child == 'o'){
-        winner('o')
-    }
-
-}
-
-//checagem vertical 
-
-if(bloco1.childNodes.length > 0 && bloco4.childNodes.length > 0 && bloco7.childNodes.length > 0 ){ //checa se a caixa selecionada ja esta preenchida
-
-    let bloco1Child = bloco1.childNodes[0].className;
-    let bloco4Child = bloco4.childNodes[0].className;
-    let bloco7Child = bloco7.childNodes[0].className;
-
-
-//Checa se a primeira linha vertical esta preenchida para determinar vitoria
-    if(bloco1Child == 'x' && bloco4Child == 'x' && bloco7Child == 'x'){
-        winner('x')
-    } else if (bloco1Child == 'o' && bloco4Child == 'o' && bloco7Child == 'o'){
-        winner('o')
-
-    }
-
-}
-
-if(bloco2.childNodes.length > 0 && bloco5.childNodes.length > 0 && bloco8.childNodes.length > 0 ){ //checa se a caixa selecionada ja esta preenchida
-
-    let bloco2Child = bloco2.childNodes[0].className;
-    let bloco5Child = bloco5.childNodes[0].className;
-    let bloco8Child = bloco8.childNodes[0].className;
-
-
-//Checa se a segunda linha vertical esta preenchida para determinar vitoria
-    if(bloco2Child == 'x' && bloco5Child == 'x' && bloco8Child == 'x'){
-        winner('x')
-
-    } else if (bloco2Child == 'o' && bloco5Child == 'o' && bloco8Child == 'o'){
-        winner('o')
-    }
-
-}
-
-
-if(bloco3.childNodes.length > 0 && bloco6.childNodes.length > 0 && bloco9.childNodes.length > 0 ){ //checa se a caixa selecionada ja esta preenchida
-
-    let bloco3Child = bloco3.childNodes[0].className;
-    let bloco6Child = bloco6.childNodes[0].className;
-    let bloco9Child = bloco9.childNodes[0].className;
-
-
-//Checa se a terceira linha vertical esta preenchida para determinar vitoria
-    if(bloco3Child == 'x' && bloco6Child == 'x' && bloco9Child == 'x'){
-        winner('x')
-
-    } else if (bloco3Child == 'o' && bloco6Child == 'o' && bloco9Child == 'o'){
-        winner('o')
-    }
-
-}
- 
-//diagonais 
-
-
-// checagem da diagonal da equerda para direita
-if(bloco1.childNodes.length > 0 && bloco5.childNodes.length > 0 && bloco9.childNodes.length > 0 ){ //checa se a caixa selecionada ja esta preenchida
-
-    let bloco1Child = bloco1.childNodes[0].className;
-    let bloco5Child = bloco5.childNodes[0].className;
-    let bloco9Child = bloco9.childNodes[0].className;
-
-
-    if(bloco1Child == 'x' && bloco5Child == 'x' && bloco9Child == 'x'){
-        winner('x')
-
-    } else if (bloco1Child == 'o' && bloco5Child == 'o' && bloco9Child == 'o'){
-        winner('o')
-
-    }
-
-}
-
-
-//checagem da diagonal da direita para esquerda
-
-if(bloco3.childNodes.length > 0 && bloco5.childNodes.length > 0 && bloco6.childNodes.length > 0 ){ //checa se a caixa selecionada ja esta preenchida
-
-    let bloco3Child = bloco3.childNodes[0].className;
-    let bloco5Child = bloco5.childNodes[0].className;
-    let bloco6Child = bloco6.childNodes[0].className;
-
-
-//Checa se o segundo linha horizontal esta preenchido para determinar vitoria
-    if(bloco3Child == 'x' && bloco5Child == 'x' && bloco6Child == 'x'){
-        winner('x')
-
-    } else if (bloco3Child == 'o' && bloco5Child == 'o' && bloco6Child == 'o'){
-        winner('o')
-    }
-
-}
- 
-// velha 
-
-let cont = 0;
-
-for(let i = 0; i < boxes.length; i++){
-    if (boxes[i].childNodes[0] != undefined){
-        cont++;
-    }
-}
-
-if (cont == 9){
-    winner('over')
-
-}
-};
-
-//limpar/ atualizar placar/ vencedor 
-
-function winner(winner){
-    let scoreX = document.querySelector('#score1');
-    let scoreO = document.querySelector('#score2');
-    let msg = '';
-
-    if(winner == 'x'){
-        scoreX.textContent = parseInt(scoreX.textContent) + 1; 
-        msg = 'Player 1 wins!'; 
-        
-    } else if (winner = 'o'){
-        scoreO.textContent = parseInt(scoreO.textContent) + 1;
-        msg = 'Player 2 wins!';
-    } else {
-        msg =  'GAME OVER';
-    }
-
-//colocando a mensagem na tela 
-
-msgText.innerHTML = msg; 
-msgContainer.classList.remove('hide'); 
-
-//esconder msg 
-
-setTimeout(function(){
-    msgContainer.classList.add('hide')
-}, 2000)
-
-//zerar jogadas
-
-player1 = 0;
-player2 = 0;
-
-//remover marcaçoes
-let boxesRemove = document.querySelectorAll('.box div');
-
-for (let i = 0; i < boxesRemove.length; i++){
-    boxesRemove[i].parentNode.removeChild(boxesRemove[i])
-}
-
-
-}
-
-//jogadas bot 
-function  botPlay(){
-    let cloneO = o.cloneNode(true);
-    cont = 0;
-    filled = 0;
-
-    for (let i = 0; i < boxes.length; i++){
-        let random = Math.floor(Math.random()* 5);
-
-        if (boxes[i].childNodes[0] ==  undefined){
-            if (random <= 1){
-                boxes[i].appendChild(cloneO);
-                cont++
-                break
-            } }else {
-                filled++;
-            }
-        }
-        if (cont == 0 && filled < 9){
-            botPlay()
-        }
-    }
-
