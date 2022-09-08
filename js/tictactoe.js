@@ -23,6 +23,15 @@ for (let i = 0; i < boxes.length; i++){
         //contando as jogadas
         if (player1 == player2){
         player1++
+        
+        if(secondPlayer == 'bot'){
+
+            //executar jogada com o bot 
+
+            botPlay()
+            player2++;
+
+        }
         } else {
         player2++
         }
@@ -41,6 +50,24 @@ function checkElement(player1, player2){
     }
 
     return element
+}
+
+// 2 players o bot 
+
+for (let i = 0; i < buttons.length; i++){
+    buttons[i].addEventListener('click', function(){
+        secondPlayer = this.getAttribute('id');
+
+        for (let  x = 0; x < buttons.length; x++){
+            buttons[x].style.display = 'none'
+        }
+
+        setTimeout(function(){
+            let container = document.querySelector('#container');
+            container.classList.remove('hide');
+
+        }, 500)
+    })
 }
 
 //checa quem venceu e perdeu 
