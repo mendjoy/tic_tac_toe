@@ -254,6 +254,7 @@ function winner(winner){
     if(winner == 'x'){
         scoreX.textContent = parseInt(scoreX.textContent) + 1; 
         msg = 'Player 1 wins!'; 
+        
     } else if (winner = 'o'){
         scoreO.textContent = parseInt(scoreO.textContent) + 1;
         msg = 'Player 2 wins!';

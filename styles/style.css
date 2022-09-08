@@ -1,35 +1,43 @@
 @charset "UTF-8"; 
 
-body{
-    text-align: center;
+*{
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
     font-family: "Open Sans", sans-serif;
-    font-size: 16px;
-    letter-spacing: 2px;
-    text-decoration: none;
-    text-transform: uppercase; 
+
+}
+
+html, body{
     background-color: black;
+    height: 100vh;
+    width: 100vw;
+    position: relative;
 }
 
 h1{
     font-size: 42px;
 }
 
-header{
-    margin-left: auto;
-    margin-right: auto;
-    width: 400px;
-    background-color: white;
-
+main {
+    position: relative;
+    height: 100vh;
+    width: 100vw;
+    text-align: center;
 }
 
-main {
+#containerall{
     background-color: white;
-    margin-left: auto;
-    margin-right: auto;
     width: 400px;
     height: 500px;
-    margin-bottom: 0px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
 }
+
+
 
 #buttons button {
     font-family: "Open Sans", sans-serif;
@@ -47,8 +55,9 @@ main {
     -webkit-user-select: none;
     touch-action: manipulation;
     margin-top: 150px;
-    align-items: center;
-
+    margin: 150px 15px;
+    width: 150px;
+    padding: 15px;
 }
 
 #buttons button:active {
@@ -59,7 +68,6 @@ main {
 
 #buttons button:hover {
     background-color:white;
-
 }
 
 
@@ -72,8 +80,8 @@ section#container {
     position: relative;
     margin-left: auto;
     margin-right: auto;
-
 }
+
 div.box{
     height: 100px;
     border: 5px solid black;
@@ -124,11 +132,13 @@ div#block-3, #block-6, #block-9{
     position: relative;
     margin-left: auto;
     margin-right: auto;
+    text-align: center;
 }
 
 #xscore{
     color: red;
     margin-right: 3px;
+    text-align: center;
 }
 
 #oscore{
@@ -151,9 +161,8 @@ div#block-3, #block-6, #block-9{
     left: 0;
     right: 0;
     top: 150px;
-    width: 500px;
+    width: 300px;
     font-size: 50px;
-    background-color: rgba(0, 0, 0, 0.637);
     color: white;
-    padding: 20px;
+    padding: 15px;
 }
