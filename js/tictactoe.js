@@ -3,7 +3,7 @@ let o = document.querySelector('.o');
 let boxes = document.querySelectorAll('.box');
 let buttons = document.querySelectorAll('#buttons button');
 let msgContainer = document.querySelector('#msg');
-let msgText = document.querySelector('#msg p');
+let msgText = document.querySelector('#msgText');
 let secondPlayer;
 
 let player1 = 0;
@@ -28,12 +28,11 @@ for (let i = 0; i < boxes.length; i++){
 
             //executar jogada com o bot 
 
-            botPlay()
+            botPlay();
             player2++;
-
         }
         } else {
-        player2++
+            player2++
         }
 
         checkVictory();
@@ -233,14 +232,14 @@ if(bloco3.childNodes.length > 0 && bloco5.childNodes.length > 0 && bloco6.childN
 
 let cont = 0;
 
-for(let i = 0; i <boxes.length; i++){
+for(let i = 0; i < boxes.length; i++){
     if (boxes[i].childNodes[0] != undefined){
         cont++;
     }
 }
 
 if (cont == 9){
-    winner('GAME OVER')
+    winner('over')
 
 }
 };
@@ -250,21 +249,21 @@ if (cont == 9){
 function winner(winner){
     let scoreX = document.querySelector('#score1');
     let scoreO = document.querySelector('#score2');
-    //let msg = '';
+    let msg = '';
 
     if(winner == 'x'){
         scoreX.textContent = parseInt(scoreX.textContent) + 1; 
-        msgText.innerHTML = 'Player 1 wins!'; 
+        msg = 'Player 1 wins!'; 
     } else if (winner = 'o'){
         scoreO.textContent = parseInt(scoreO.textContent) + 1;
-        msgText.innerHTML = 'Player 2 wins!';
+        msg = 'Player 2 wins!';
     } else {
-        msgText.innerHTML =  'GAME OVER';
+        msg =  'GAME OVER';
     }
 
 //colocando a mensagem na tela 
 
-
+msgText.innerHTML = msg; 
 msgContainer.classList.remove('hide'); 
 
 //esconder msg 
@@ -287,3 +286,27 @@ for (let i = 0; i < boxesRemove.length; i++){
 
 
 }
+
+//jogadas bot 
+function  botPlay(){
+    let cloneO = o.cloneNode(true);
+    cont = 0;
+    filled = 0;
+
+    for (let i = 0; i < boxes.length; i++){
+        let random = Math.floor(Math.random()* 5);
+
+        if (boxes[i].childNodes[0] ==  undefined){
+            if (random <= 1){
+                boxes[i].appendChild(cloneO);
+                cont++
+                break
+            } }else {
+                filled++;
+            }
+        }
+        if (cont == 0 && filled < 9){
+            botPlay()
+        }
+    }
+

@@ -2,18 +2,54 @@
 
 body{
     text-align: center;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: "Open Sans", sans-serif;
+    font-size: 16px;
+    letter-spacing: 2px;
+    text-decoration: none;
+    text-transform: uppercase; 
+    background-color: black;
 }
 
 h1{
     font-size: 42px;
 }
 
-#buttons button {
-    border: none;
-    padding: 10px 15px;
-    margin: 0px 10px;
+main {
+    background-color: white;
+    margin-left: auto;
+    margin-right: auto;
+    width: 600px;
+    height: 500px;
 }
+
+#buttons button {
+font-family: "Open Sans", sans-serif;
+font-size: 16px;
+letter-spacing: 2px;
+text-decoration: none;
+text-transform: uppercase;
+color: #000;
+cursor: pointer;
+border: 3px solid;
+padding: 0.25em 0.5em;
+box-shadow: 1px 1px 0px 0px, 2px 2px 0px 0px, 3px 3px 0px 0px, 4px 4px 0px 0px, 5px 5px 0px 0px;
+position: relative;
+user-select: none;
+-webkit-user-select: none;
+touch-action: manipulation;
+}
+
+#buttons button:active {
+    box-shadow: 0px 0px 0px 0px;
+    top: 5px;
+    left: 5px;
+}
+
+#buttons button:hover {
+    background-color:white;
+
+}
+
 
 section#container {
     display: flex;
@@ -96,7 +132,7 @@ div#block-3, #block-6, #block-9{
     margin: 0px 20px; 
 }
 
-#msg p {
+ #msgText {
     position: absolute;
     margin-left: auto;
     margin-right: auto;
