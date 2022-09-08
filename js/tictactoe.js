@@ -3,7 +3,7 @@ let o = document.querySelector('.o');
 let boxes = document.querySelectorAll('.box');
 let buttons = document.querySelectorAll('#buttons button');
 let msgContainer = document.querySelector('#msg');
-let msg = document.querySelector('#msg p');
+let msgText = document.querySelector('#msg p');
 let secondPlayer;
 
 let player1 = 0;
@@ -66,9 +66,9 @@ if(bloco1.childNodes.length > 0 && bloco2.childNodes.length > 0 && bloco3.childN
 
 //Checa se a primeira linha horizontal esta preenchido para determinar vitoria
     if(bloco1Child == 'x' && bloco2Child == 'x' && bloco3Child == 'x'){
-
+        winner('x')
     } else if (bloco1Child == 'o' && bloco2Child == 'o' && bloco3Child == 'o'){
-
+        winner('o')
     }
 
     }
@@ -83,9 +83,10 @@ if(bloco1.childNodes.length > 0 && bloco2.childNodes.length > 0 && bloco3.childN
 
 //Checa se o segundo linha horizontal esta preenchido para determinar vitoria
     if(bloco4Child == 'x' && bloco5Child == 'x' && bloco6Child == 'x'){
+        winner('x')
 
     } else if (bloco4Child == 'o' && bloco5Child == 'o' && bloco6Child == 'o'){
-
+        winner('o')
     }
 
 }
@@ -99,9 +100,9 @@ if(bloco7.childNodes.length > 0 && bloco8.childNodes.length > 0 && bloco9.childN
 
 //Checa se a terceira linha horizontal esta preenchido para determinar vitoria
     if(bloco7Child == 'x' && bloco8Child == 'x' && bloco9Child == 'x'){
-
+        winner('x')
     } else if (bloco7Child == 'o' && bloco8Child == 'o' && bloco9Child == 'o'){
-
+        winner('o')
     }
 
 }
@@ -117,8 +118,9 @@ if(bloco1.childNodes.length > 0 && bloco4.childNodes.length > 0 && bloco7.childN
 
 //Checa se a primeira linha vertical esta preenchida para determinar vitoria
     if(bloco1Child == 'x' && bloco4Child == 'x' && bloco7Child == 'x'){
-
+        winner('x')
     } else if (bloco1Child == 'o' && bloco4Child == 'o' && bloco7Child == 'o'){
+        winner('o')
 
     }
 
@@ -133,9 +135,10 @@ if(bloco2.childNodes.length > 0 && bloco5.childNodes.length > 0 && bloco8.childN
 
 //Checa se a segunda linha vertical esta preenchida para determinar vitoria
     if(bloco2Child == 'x' && bloco5Child == 'x' && bloco8Child == 'x'){
+        winner('x')
 
     } else if (bloco2Child == 'o' && bloco5Child == 'o' && bloco8Child == 'o'){
-
+        winner('o')
     }
 
 }
@@ -150,9 +153,10 @@ if(bloco3.childNodes.length > 0 && bloco6.childNodes.length > 0 && bloco9.childN
 
 //Checa se a terceira linha vertical esta preenchida para determinar vitoria
     if(bloco3Child == 'x' && bloco6Child == 'x' && bloco9Child == 'x'){
+        winner('x')
 
     } else if (bloco3Child == 'o' && bloco6Child == 'o' && bloco9Child == 'o'){
-
+        winner('o')
     }
 
 }
@@ -169,8 +173,10 @@ if(bloco1.childNodes.length > 0 && bloco5.childNodes.length > 0 && bloco9.childN
 
 
     if(bloco1Child == 'x' && bloco5Child == 'x' && bloco9Child == 'x'){
+        winner('x')
 
     } else if (bloco1Child == 'o' && bloco5Child == 'o' && bloco9Child == 'o'){
+        winner('o')
 
     }
 
@@ -188,9 +194,10 @@ if(bloco3.childNodes.length > 0 && bloco5.childNodes.length > 0 && bloco6.childN
 
 //Checa se o segundo linha horizontal esta preenchido para determinar vitoria
     if(bloco3Child == 'x' && bloco5Child == 'x' && bloco6Child == 'x'){
+        winner('x')
 
     } else if (bloco3Child == 'o' && bloco5Child == 'o' && bloco6Child == 'o'){
-
+        winner('o')
     }
 
 }
@@ -206,6 +213,50 @@ for(let i = 0; i <boxes.length; i++){
 }
 
 if (cont == 9){
-    
+    winner('GAME OVER')
+
 }
+};
+
+//limpar/ atualizar placar/ vencedor 
+
+function winner(winner){
+    let scoreX = document.querySelector('#score1');
+    let scoreO = document.querySelector('#score2');
+    //let msg = '';
+
+    if(winner == 'x'){
+        scoreX.textContent = parseInt(scoreX.textContent) + 1; 
+        msgText.innerHTML = 'Player 1 wins!'; 
+    } else if (winner = 'o'){
+        scoreO.textContent = parseInt(scoreO.textContent) + 1;
+        msgText.innerHTML = 'Player 2 wins!';
+    } else {
+        msgText.innerHTML =  'GAME OVER';
+    }
+
+//colocando a mensagem na tela 
+
+
+msgContainer.classList.remove('hide'); 
+
+//esconder msg 
+
+setTimeout(function(){
+    msgContainer.classList.add('hide')
+}, 2000)
+
+//zerar jogadas
+
+player1 = 0;
+player2 = 0;
+
+//remover marcaçoes
+let boxesRemove = document.querySelectorAll('.box div');
+
+for (let i = 0; i < boxesRemove.length; i++){
+    boxesRemove[i].parentNode.removeChild(boxesRemove[i])
+}
+
+
 }

@@ -65,9 +65,9 @@ div#block-3, #block-6, #block-9{
     margin-top: 17px;
 }
 
-/*.hide {
+.hide {
     display: none !important;
-}*/
+}
 
 #score{
     font-weight: bold;
@@ -108,5 +108,4 @@ div#block-3, #block-6, #block-9{
     background-color: rgba(0, 0, 0, 0.637);
     color: white;
     padding: 20px;
-    display: none;
 }
